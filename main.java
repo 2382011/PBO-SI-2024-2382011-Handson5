@@ -5,14 +5,14 @@ public class main {
     public static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        System.out.println("BEFORE EDIT");
+        System.out.println("BEFORE DELETE");
         addTodoList("Mewarnai");
         addTodoList("Membaca");
         addTodoList("Bersepeda");
         addTodoList("Berkhotbah");
         showTodoList();
-        removeTodoList(3);
-        System.out.println("AFTER EDIT");
+        editTodoList(3,"Bekerja");
+        System.out.println("AFTER DELETE");
         showTodoList();
 
     }
@@ -28,7 +28,7 @@ public class main {
         }
     }
 
-    public static void addTodoList(String todos) {
+    public static void addTodoList(String todo) {
         resizeArrayIfFull();
 
         for (int i = 0; i < todos.length; i++) {
@@ -40,8 +40,8 @@ public class main {
     }
 
     public static void resizeArrayIfFull() {
-        // cek wether todos is full
-        Boolean isFull = true;
+        // cek whether todos is full
+        Boolean isFull;
         isFull = isArrayFull();
 
         // if full, resize current array to two times bigger
@@ -49,9 +49,8 @@ public class main {
             resizeArrayToTwoTimesBigger();
         }
     }
-}
 
-    public static boolean isArrayFull() {
+    public static Boolean isArrayFull() {
         for(int i = 0; i < todos.length; i++){
             if(todos[i] == null){
                return false;
@@ -73,18 +72,17 @@ public static boolean removeTodoList(Integer number) {
         return false;
     }
 
-    for (int i = number - 1; i < todos.length; i++){
+    for (int i = number; i < todos.length; i++){
         if (i == (todos.length - 1)){
             todos[i] = null;
         } else {
-            // replace with the element on the right
             todos[i] = todos[i + 1];
         }
     }
     return true;
 }
 
-public static boolean isSelectedTodoNotValid(Integer number) {
+private static boolean isSelectedTodoNotValid(Integer number) {
     // cek if the number is zero or less then zero
     if (number <= 0){
         return true;
